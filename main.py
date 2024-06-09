@@ -1,3 +1,5 @@
+#Bu proje Yapay Zeka Teknikleri dersi kapsamında Final Projesi olarak Alperen Toker ve Onur Somuncu tarafından geliştirilmiştir.
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 import numpy as np
@@ -119,7 +121,6 @@ def analyze_results(regressor):
 
     mae = regressor.mean_absolute_error()
     mse = regressor.mean_squared_error()
-
     if mae <= 5:
         mae_analysis = "düşük"
     elif mae <= 10:
@@ -128,7 +129,6 @@ def analyze_results(regressor):
         mae_analysis = "orta yüksek"
     else:
         mae_analysis = "yüksek"
-
     if mse <= 50:
         mse_analysis = "düşük"
     elif mse <= 100:
@@ -137,10 +137,8 @@ def analyze_results(regressor):
         mse_analysis = "orta yüksek"
     else:
         mse_analysis = "yüksek"
-
     errors = regressor.predict(regressor.x_test) - regressor.y_test
     error_mean = np.mean(errors)
-
     if error_mean < -5:
         error_analysis = "çok fazla negatif"
     elif error_mean < 0:
@@ -151,9 +149,7 @@ def analyze_results(regressor):
         error_analysis = "çok fazla pozitif"
     else:
         error_analysis = "fazla pozitif"
-
     recommendations = []
-
     if r2_analysis == "düşük":
         degree_increase = 2
         recommendations.append(
@@ -236,39 +232,29 @@ class StockPredictionApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Hisse Senedi Tahmini")
-
         self.degree = 2
         self.Lambda = 0.03
         self.plot_window = None
-
         self.create_widgets()
 
     def create_widgets(self):
-        # Başlık etiketi
         ttk.Label(self.root, text="Hisse Senedi Tahmini", font=("Helvetica", 16)).pack(pady=10)
-
-        # Kullanıcıdan veri alma alanları
-        self.ticker_entry = self.create_labeled_entry("Hisse Sembolü (örn: AAPL):")
+        self.ticker_entry = self.create_labeled_entry("Hisse Sembolü (örn: DOAS:IS ):")
         self.start_date_entry = self.create_labeled_entry("Başlangıç Tarihi (YYYY-MM-DD):")
         self.end_date_entry = self.create_labeled_entry("Bitiş Tarihi (YYYY-MM-DD):")
         self.days_into_future_entry = self.create_labeled_entry("Gelecekteki Gün Sayısı:")
-
-        # Polinom derecesi ve Lambda giriş alanları
         self.degree_label = ttk.Label(self.root, text=f"Polinom Derecesi: {self.degree}")
         self.degree_label.pack(pady=5)
         self.degree_up_button = ttk.Button(self.root, text="Polinom Derecesini Arttır", command=self.increase_degree)
         self.degree_up_button.pack(pady=5)
         self.degree_down_button = ttk.Button(self.root, text="Polinom Derecesini Azalt", command=self.decrease_degree)
         self.degree_down_button.pack(pady=5)
-
         self.lambda_label = ttk.Label(self.root, text=f"Lambda: {self.Lambda}")
         self.lambda_label.pack(pady=5)
         self.lambda_up_button = ttk.Button(self.root, text="Lambda'yı Arttır", command=self.increase_lambda)
         self.lambda_up_button.pack(pady=5)
         self.lambda_down_button = ttk.Button(self.root, text="Lambda'yı Azalt", command=self.decrease_lambda)
         self.lambda_down_button.pack(pady=5)
-
-        # Tahmin butonu
         self.predict_button = ttk.Button(self.root, text="Tahmin Yap", command=self.predict)
         self.predict_button.pack(pady=10)
 
