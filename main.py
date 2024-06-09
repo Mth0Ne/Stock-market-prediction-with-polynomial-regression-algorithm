@@ -7,7 +7,6 @@ import math
 import yfinance as yf
 import pandas as pd
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
 
 class PolynomialRegression:
     def __init__(self, x, y, degree=2, test_size=0.2):
